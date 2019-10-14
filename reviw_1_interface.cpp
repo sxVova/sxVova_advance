@@ -18,7 +18,8 @@ std::vector<int> read_reverse_integer_vector(const int vector_size);
 
 // Find the numbers of all employees from 
 // the longest growing subset
-std::vector<int> find_longest_growing_subset(const std::vector<int> &data_input, const int vector_size);
+std::vector<int> find_longest_growing_subset(
+    const std::vector<int> &data_input, const int vector_size);
 
 // Write the size and content of the vector
 void write_vector_information(const std::vector<int> &informative_vector);
