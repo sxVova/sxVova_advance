@@ -6,7 +6,8 @@
 // to the first(maximally left) at least value 
 // comparable to "elem" between the "begin" and 
 // "end" of the given vector.
-std::vector<int>::iterator l_bound(std::vector<int>::iterator begin, std::vector<int>::iterator end, int elem);
+std::vector<int>::iterator l_bound(std::vector<int>::iterator begin, 
+				   std::vector<int>::iterator end, int elem);
 
 int main()
 {
