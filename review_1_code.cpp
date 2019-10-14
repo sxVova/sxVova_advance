@@ -37,7 +37,7 @@ int main()
 	std::cin >> amount;
 	std::vector<int>data_in(amount);
 	for (int i(amount - 1); i >= 0; --i) {
-		std::cin >> data_in[i];		//immediately reverse the given vector
+		std::cin >> data_in[i];		// immediately reverse the given vector
 	}
 	std::vector<int>data(amount + 1, INT_MAX);
 	data[0] = INT_MIN;
@@ -61,7 +61,7 @@ int main()
 	}
 	std::vector<int>answer;
 	int position = pos[length];
-	while (position != -1) {	//answer recovery
+	while (position != -1) {    // answer recovery
 		answer.push_back(amount - position);
 		position = prev[position];
 	}
