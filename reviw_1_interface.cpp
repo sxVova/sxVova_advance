@@ -4,32 +4,32 @@
 
 // The function returns an iterator that points 
 // to the first(maximally left) at least value 
-// comparable to "elem" between the "begin" and 
-// "end" of the given vector
-std::vector<int>::iterator l_bound(std::vector<int>::iterator begin,
-    const std::vector<int>::iterator &end, const int elem);
+// comparable to "insertion_element" between the "start_of_search" and 
+// "end_of_search" of the given vector
+std::vector<int>::iterator find_lower_bound(std::vector<int>::iterator start_of_search,
+    const std::vector<int>::iterator &end_of_search, const int insertion_element);
 
-// Input the size of the input data
-int input_sizeof_data();
+// Read the size of the input data
+int read_integer();
 
-// Input an information about the workers 
+// Read an information about the workers 
 // and reverse it for further calculations
-std::vector<int> input_workers_data(const int vector_size);
+std::vector<int> read_reverse_integer_vector(const int vector_size);
 
 // Find the numbers of all employees from 
 // the longest growing subset
-std::vector<int> work(const std::vector<int> &data_in, const int vector_size);
+std::vector<int> find_longest_growing_subset(const std::vector<int> &data_input, const int vector_size);
 
-// Output the size and content of the vector
-void output_vector_information(const std::vector<int> &answer);
+// Write the size and content of the vector
+void write_vector_information(const std::vector<int> &informative_vector);
 
 int main()
 {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
-    const int vector_size = input_sizeof_data();
-    const std::vector<int>data_in = input_workers_data(vector_size);
-    const std::vector<int>answer = work(data_in, vector_size);
-    output_vector_information(answer);
+    const int vector_size = read_integer();
+    const std::vector<int> data_input = read_reverse_integer_vector(vector_size);
+    const std::vector<int> answer = find_longest_growing_subset(data_input, vector_size);
+    write_vector_information(answer);
     return 0;
 }
