@@ -7,29 +7,29 @@
 // comparable to "elem" between the "begin" and 
 // "end" of the given vector
 std::vector<int>::iterator l_bound(std::vector<int>::iterator begin,
-    const std::vector<int>::iterator &end, const int &elem);
+    const std::vector<int>::iterator &end, const int elem);
 
-// Write the size of the input data
-int input_size();
+// Input the size of the input data
+int input_sizeof_data();
 
-// Write an information about the workers 
+// Input an information about the workers 
 // and reverse it for further calculations
-std::vector<int> input_vector(const int &amount);
+std::vector<int> input_workers_data(const int vector_size);
 
 // Find the numbers of all employees from 
 // the longest growing subset
-std::vector<int> work(const std::vector<int> &data_in, const int &amount);
+std::vector<int> work(const std::vector<int> &data_in, const int vector_size);
 
-// Show the answer
-void output(const std::vector<int> &answer);
+// Output the size and content of the vector
+void output_vector_information(const std::vector<int> &answer);
 
 int main()
 {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
-    const int amount = input_size();
-    const std::vector<int>data_in = input_vector(amount);
-    const std::vector<int>answer = work(data_in, amount);
-    output(answer);
+    const int vector_size = input_sizeof_data();
+    const std::vector<int>data_in = input_workers_data(vector_size);
+    const std::vector<int>answer = work(data_in, vector_size);
+    output_vector_information(answer);
     return 0;
 }
