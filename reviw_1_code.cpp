@@ -61,7 +61,7 @@ std::vector<int> find_optimal_subsequence(const std::vector<int> &employee_deman
     std::vector<int> position(vector_size + 1, 0);
     position[0] = -1;
     std::vector<int> previous_element(vector_size, 0);
-    int length_of_the_maximum_subset = 0;
+    int length_maximum_subsequence = 0;
     std::vector<int>::iterator pointer_to_the_place_to_insert;
     for (int current(0); current < vector_size; ++current) {
         int insertion_index(0);
@@ -74,13 +74,13 @@ std::vector<int> find_optimal_subsequence(const std::vector<int> &employee_deman
             dynamic_data[insertion_index] = reversed_employee_ratios[current];
             position[insertion_index] = current;
             previous_element[current] = position[insertion_index - 1];
-            if (insertion_index > length_of_the_maximum_subset) {
-                length_of_the_maximum_subset = insertion_index;
+            if (insertion_index > length_maximum_subsequence) {
+                length_maximum_subsequence = insertion_index;
             }
         }
     }
     std::vector<int> largest_non_increasing_sequence;
-    int current_position = position[length_of_the_maximum_subset];
+    int current_position = position[length_maximum_subsequence];
     while (current_position != -1) {    // answer recovery
         largest_non_increasing_sequence.push_back(vector_size - current_position);
         current_position = previous_element[current_position];
