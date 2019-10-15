@@ -18,10 +18,10 @@ std::vector<int> read_integer_vector(const int vector_size);
 
 // Find the numbers of all employees from 
 // the largest non - increasing sequence
-std::vector<int> find_optimal_subsequence(std::vector<int> data_input);
+std::vector<int> find_optimal_subsequence(const std::vector<int> &integer_vector);
 
 // Write the size and content of the vector
-void write_vector_information(const std::vector<int> &informative_vector);
+void write_vector_information(const std::vector<int> &integer_vector);
 
 int main()
 {
