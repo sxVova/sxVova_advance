@@ -1,24 +1,26 @@
 #include <iostream>
 #include <vector>
 #include <climits>
+#include <algorithm>
 
 // The function returns an iterator that points 
 // to the first(maximally left) at least value 
 // comparable to "insertion_element" between the "start_of_search" and 
 // "end_of_search" of the given vector
-std::vector<int>::iterator find_lower_bound(std::vector<int>::iterator start_of_search,
+std::vector<int>::iterator find_lower_bound(const std::vector<int>::iterator &start_of_search,
     const std::vector<int>::iterator &end_of_search, const int insertion_element)
 {
     std::vector<int>::iterator temporary;
+    std::vector<int>::iterator resault = start_of_search;
     std::iterator_traits<std::vector<int>::iterator>::difference_type count, step;
-    count = distance(start_of_search, end_of_search);
+    count = distance(resault, end_of_search);
     while (count > 0) {
-        temporary = start_of_search;
+        temporary = resault;
         step = count / 2;
         advance(temporary, step);
         if (*temporary <= insertion_element)
         {
-            start_of_search = ++temporary;
+            resault = ++temporary;
             count -= step + 1;
         }
         else
@@ -26,7 +28,7 @@ std::vector<int>::iterator find_lower_bound(std::vector<int>::iterator start_of_
             count = step;
         }
     }
-    return start_of_search;
+    return resault;
 }
 
 // Read the size of the input data
@@ -38,21 +40,22 @@ int read_integer()
 }
 
 // Read an information about the workers 
-// and reverse it for further calculations
-std::vector<int> read_reverse_integer_vector(const int vector_size)
+std::vector<int> read_integer_vector(const int vector_size)
 {
     std::vector<int> data_input(vector_size);
-    for (int i(vector_size - 1); i >= 0; --i) {
+    for (int i(0); i < vector_size; ++i) {
         std::cin >> data_input[i];
     }
     return data_input;
 }
 
 // Find the numbers of all employees from 
-// the longest growing subset
-std::vector<int> find_longest_growing_subset(
-    const std::vector<int> &data_input, const int vector_size)
+// the largest non - increasing sequence
+std::vector<int> find_optimal_subsequence(const std::vector<int> &employee_demand_ratios)
 {
+    std::vector<int> reversed_employee_ratios = employee_demand_ratios;
+    std::reverse(reversed_employee_ratios.begin(), reversed_employee_ratios.end());
+    const int vector_size = reversed_employee_ratios.size();
     std::vector<int> dynamic_data(vector_size + 1, INT_MAX);
     dynamic_data[0] = INT_MIN;
     std::vector<int> position(vector_size + 1, 0);
@@ -63,11 +66,12 @@ std::vector<int> find_longest_growing_subset(
     for (int current(0); current < vector_size; ++current) {
         int insertion_index(0);
         pointer_to_the_place_to_insert = find_lower_bound(
-            dynamic_data.begin(), dynamic_data.end(), data_input[current]);
+            dynamic_data.begin(), dynamic_data.end(), reversed_employee_ratios[current]);
         insertion_index += pointer_to_the_place_to_insert - dynamic_data.begin();
         if (dynamic_data[insertion_index - 1] <= 
-            data_input[current] && data_input[current] <= dynamic_data[insertion_index]) {
-            dynamic_data[insertion_index] = data_input[current];
+            reversed_employee_ratios[current] && reversed_employee_ratios[current]
+            <= dynamic_data[insertion_index]) {
+            dynamic_data[insertion_index] = reversed_employee_ratios[current];
             position[insertion_index] = current;
             previous_element[current] = position[insertion_index - 1];
             if (insertion_index > length_of_the_maximum_subset) {
@@ -75,20 +79,20 @@ std::vector<int> find_longest_growing_subset(
             }
         }
     }
-    std::vector<int> answer;
+    std::vector<int> largest_non_increasing_sequence;
     int current_position = position[length_of_the_maximum_subset];
     while (current_position != -1) {    // answer recovery
-        answer.push_back(vector_size - current_position);
+        largest_non_increasing_sequence.push_back(vector_size - current_position);
         current_position = previous_element[current_position];
     }
-    return answer;
+    return largest_non_increasing_sequence;
 }
 
 // Write the size and content of the vector
-void write_vector_information(const std::vector<int> &informative_vector)
+void write_vector_information(const std::vector<int> &integer_vector)
 {
-    std::cout << informative_vector.size() << '\n';
-    for (auto current_element : informative_vector) {
+    std::cout << integer_vector.size() << '\n';
+    for (auto current_element : integer_vector) {
         std::cout << current_element << '\n';
     }
 }
@@ -98,8 +102,8 @@ int main()
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     const int vector_size = read_integer();
-    const std::vector<int> data_input = read_reverse_integer_vector(vector_size);
-    const std::vector<int> answer = find_longest_growing_subset(data_input, vector_size);
-    write_vector_information(answer);
+    const std::vector<int> employee_demand_ratios = read_integer_vector(vector_size);
+    const std::vector<int> optimal_subsequence = find_optimal_subsequence(employee_demand_ratios);
+    write_vector_information(optimal_subsequence);
     return 0;
 }
