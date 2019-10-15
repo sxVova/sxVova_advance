@@ -7,7 +7,7 @@
 // to the first(maximally left) at least value 
 // comparable to "insertion_element" between the "start_of_search" and 
 // "end_of_search" of the given vector
-std::vector<int>::iterator find_lower_bound(std::vector<int>::iterator start_of_search,
+std::vector<int>::iterator find_lower_bound(const std::vector<int>::iterator &start_of_search,
     const std::vector<int>::iterator &end_of_search, const int insertion_element);
 
 // Read the size of the input data
