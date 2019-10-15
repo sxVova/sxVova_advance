@@ -18,7 +18,7 @@ std::vector<int> read_integer_vector(const int vector_size);
 
 // Find the numbers of all employees from 
 // the largest non - increasing sequence
-std::vector<int> find_optimal_subsequence(const std::vector<int> &integer_vector);
+std::vector<int> find_optimal_subsequence(const std::vector<int> &employee_demand_ratios);
 
 // Write the size and content of the vector
 void write_vector_information(const std::vector<int> &integer_vector);
