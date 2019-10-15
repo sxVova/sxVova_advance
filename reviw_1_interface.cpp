@@ -18,8 +18,7 @@ std::vector<int> read_integer_vector(const int vector_size);
 
 // Find the numbers of all employees from 
 // the largest non - increasing sequence
-std::vector<int> find_indices_of_the_largest_non_increasing_sequence(
-    std::vector<int> data_input);
+std::vector<int> find_optimal_subsequence(std::vector<int> data_input);
 
 // Write the size and content of the vector
 void write_vector_information(const std::vector<int> &informative_vector);
@@ -30,8 +29,7 @@ int main()
     std::cin.tie(NULL);
     const int vector_size = read_integer();
     const std::vector<int> employee_demand_ratios = read_integer_vector(vector_size);
-    const std::vector<int> indices_of_the_largest_non_increasing_sequence =
-        find_indices_of_the_largest_non_increasing_sequence(employee_demand_ratios);
-    write_vector_information(indices_of_the_largest_non_increasing_sequence);
+    const std::vector<int> optimal_subsequence = find_optimal_subsequence(employee_demand_ratios);
+    write_vector_information(optimal_subsequence);
     return 0;
 }
