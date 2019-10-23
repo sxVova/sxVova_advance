@@ -54,17 +54,20 @@ std::vector<int> read_integer_vector(const int vector_size, std::istream& input 
 // the largest non - increasing sequence
 std::vector<int> find_optimal_subsequence(const std::vector<int>& employee_demand_ratios)
 {
-    std::vector<int> reversed_ratios;
-    copy(employee_demand_ratios.begin(), employee_demand_ratios.end(), 
-        back_inserter(reversed_ratios));
+    std::vector<int> reversed_ratios(employee_demand_ratios);
     std::reverse(reversed_ratios.begin(), reversed_ratios.end());
+
     const int vector_size = reversed_ratios.size();
+
     std::vector<int> largest_number_sequence_ends(vector_size + 1, INT_MAX);
-    largest_number_sequence_ends[0] = INT_MIN;
     std::vector<int> position(vector_size + 1, 0);
-    position[0] = -1;
     std::vector<int> previous_element(vector_size, 0);
+
+    largest_number_sequence_ends[0] = INT_MIN;
+    position[0] = -1;
+
     int length_maximum_subsequence = 0;
+
     std::vector<int>::iterator pointer_to_the_place_to_insert;
 
     for (int current = 0; current < vector_size; ++current) 
